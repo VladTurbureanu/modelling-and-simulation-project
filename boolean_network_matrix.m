@@ -12,7 +12,7 @@ function main()
     end
     
     neighbouring_nodes = {};
-    for iteration = 1:20
+    for iteration = 1:10
         % Each node in the network is connected to 3 other nodes (randomly)
         % Here we have 16 genes, so 16 positions. 
         % Q: can they be connected to itself ? For now, we assume yes because it's
@@ -45,6 +45,7 @@ function main()
 
         % Specific rules for transitioning
         % Random values with 3 input (-> 8 permutations)
+        % This should probably be outside of the loop (!!!!)
         truth_table_values = randi([0 1],1,8);
         new_matrix = zeros(4);
         % Synchronous update (think so). 
