@@ -3,8 +3,7 @@ function main()
     
     % Each node in the network has a boolean variable attached to it (0 or 1)
     % Increase the number after '>' for less ones, decrease it for more.
-    A = rand(matrix_size,matrix_size) > 0.7; 
-
+    A = rand(matrix_size,matrix_size) > 0.7;
     neighbouring_nodes = {};
     no_of_genes = matrix_size * matrix_size;
 
@@ -13,7 +12,12 @@ function main()
     % e.g. random values with 3 input (-> 8 permutations)
     % This should probably be outside of the loop 
     truth_table_values = randi([0 1],1, 2^no_of_connections);
+    % standard adjacency matrix of the network
+    adjacency_matrix = zeros(no_of_genes,no_of_genes);
 
+    % state matrix will be used to count cycles in the states of the
+    % network
+    % state_matrix = zeros(matrix_size,matrix_size,20);
     for iteration = 1:20
         % Each node in the network is connected to 3 other nodes (randomly)
         % Here we have 16 genes (in case of a 4x4 matrix), so 16 positions. 
@@ -28,6 +32,11 @@ function main()
             % So K = 3 in this case
             if iteration == 1
                 neighbouring_nodes{gene} = randperm(no_of_genes,no_of_connections);
+                % create the adjacency matrix by using the neighboring
+                % nodes
+                for i = 1:length(neighbouring_nodes{gene})
+                    adjacency_matrix(gene,neighbouring_nodes{gene}(i))=1;
+                end
             end
             
             % Get the binary values of the neighbours
@@ -39,6 +48,7 @@ function main()
             binary_values;
             neighbours_matrix{gene} = binary_values;
         end
+
         % print C and an element in C
         neighbours_matrix;
         for j = 1:no_of_genes
@@ -55,9 +65,13 @@ function main()
         A = new_matrix;
         display_grid(A, iteration)
         pause(0.3)
-
+        % state_matrix(:,:,iteration) = A;
     end
-
+    % display the network as a directed graph by using the adjacency matrix
+    figure;
+    G = digraph(adjacency_matrix);
+    plot(G);
+    
 end
 
 % Reads user input
