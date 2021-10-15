@@ -81,7 +81,7 @@ function cycle_length = boolean_network_matrix(matrix_size, no_of_connections, n
             iteration
             cycle_length = iteration - last_value
             cycle_cntr = cycle_cntr + 1;
-            if cycle_cntr == 3
+            if cycle_cntr == 1
                 break;
             end
         end

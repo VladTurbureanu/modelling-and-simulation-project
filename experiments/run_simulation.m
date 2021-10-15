@@ -7,7 +7,19 @@ function run_simulation()
         cycle_lengths(i) = boolean_network_matrix(matrix_size, no_of_connections, no_of_iterations, visualization, run_to_end);
     end
     
-    cycle_lengths
+    for j=1:length(cycle_lengths)
+        if cycle_lengths(j) > 100
+            cycle_lengths(j) = 100;
+        end
+    end
+    
+    histogram(cycle_lengths, 100)
+    xlim([-1,100])
+    xt = xticklabels; 
+    xt{end} = '> 100'
+    xticklabels(xt)
+    xlabel('Cycle length')
+    ylabel('Frequency')
 
 end
 
