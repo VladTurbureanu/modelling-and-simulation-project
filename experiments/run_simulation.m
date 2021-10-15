@@ -2,10 +2,15 @@ function run_simulation()
     [matrix_size, no_of_connections, no_of_iterations, visualization, run_to_end] = read_input();
     
     cycle_lengths = [];
-    for i = 1:100
-        disp("Found " + i + " / 100 cycles so far...")
+    for i = 1:200
+        disp("Found " + i + " / 200 cycles so far...")
         cycle_lengths(i) = boolean_network_matrix(matrix_size, no_of_connections, no_of_iterations, visualization, run_to_end);
     end
+    
+    cycle_lengths
+    mean(cycle_lengths)
+    mode(cycle_lengths)
+    median(cycle_lengths)
     
     for j=1:length(cycle_lengths)
         if cycle_lengths(j) > 100
@@ -17,7 +22,7 @@ function run_simulation()
     xlim([-1,100])
     xt = xticklabels; 
     xt{end} = '> 100'
-    xticklabels(xt)
+    xticklabels(xt);
     xlabel('Cycle length')
     ylabel('Frequency')
 

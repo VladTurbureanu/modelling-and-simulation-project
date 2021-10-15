@@ -105,6 +105,8 @@ function output = truth_table(no_of_connections, neighbours, truth_table_values)
         output = truth_table2(neighbours, truth_table_values);
     elseif no_of_connections == 3
         output = truth_table3(neighbours, truth_table_values);
+    elseif no_of_connections == 1
+        output = neighbours;
     end
 end
            
