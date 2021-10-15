@@ -45,18 +45,11 @@ function main()
             for i = 1:length(neighbouring_nodes{gene})
                 binary_values(i) = A(neighbouring_nodes{gene}(i));
             end
-            binary_values;
             neighbours_matrix{gene} = binary_values;
         end
 
-        % print C and an element in C
-        neighbours_matrix;
-        for j = 1:no_of_genes
-            neighbours_matrix{j};
-        end
-
         new_matrix = zeros(matrix_size);
-        % Synchronous update (think so). 
+        % Synchronous update
         for gene_update = 1:no_of_genes
             neighbours = neighbours_matrix{gene_update};
             new_matrix(gene_update) = truth_table(no_of_connections, neighbours, truth_table_values);
@@ -106,8 +99,7 @@ function [matrix_size, no_of_connections, no_of_iterations] = read_input()
 
 end
 
-% It should be possible to do this more efficiently, will have a look at it
-% later
+% It should be possible to do this more efficiently, will have a look at it later
 function output = truth_table(no_of_connections, neighbours, truth_table_values)
     output = 0;
     if no_of_connections == 2
@@ -152,21 +144,15 @@ end
 % Based on https://stackoverflow.com/questions/3280705/how-can-i-display-a-2d-binary-matrix-as-a-black-white-plot
 function display_grid(A, iteration)
     cMap = [1 0 0; 0 0.8 0];
-    [r, c] = size(A);                          % Get the matrix size
-    imagesc((1:c)+0.5, (1:r)+0.5, A);          % Plot the image
-    % cMap
-    colormap(cMap);                              % Use a gray colormap
-    axis equal                                   % Make axes grid sizes equal
-    %set(gca, 'XTick', 1:(c+1), 'YTick', 1:(r+1), ...  % Change some axes properties
-    %         'XLim', [1 c+1], 'YLim', [1 r+1], ...
-    %         'GridLineStyle', '-', 'XGrid', 'on', 'YGrid', 'on');
-    set(gca,  ...  % Change some axes properties
+    [r, c] = size(A);                         
+    imagesc((1:c)+0.5, (1:r)+0.5, A);          
+    
+    colormap(cMap);                          
+    axis equal                               
+    set(gca,  ...  
              'XLim', [1 c+1], 'YLim', [1 r+1], ...
              'GridLineStyle', '-', 'XGrid', 'on', 'YGrid', 'on');
-    
-    % hold on
-    %legend('on', 'off')
-    %hold on
+
     title(['Iteration ', num2str(iteration)])
 end
 
