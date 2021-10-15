@@ -1,5 +1,5 @@
 function main()
-    [matrix_size, no_of_connections] = read_input();
+    [matrix_size, no_of_connections, no_of_iterations] = read_input();
     
     % Each node in the network has a boolean variable attached to it (0 or 1)
     % Increase the number after '>' for less ones, decrease it for more.
@@ -18,7 +18,7 @@ function main()
     % state matrix will be used to count cycles in the states of the
     % network
     % state_matrix = zeros(matrix_size,matrix_size,20);
-    for iteration = 1:20
+    for iteration = 1:no_of_iterations
         % Each node in the network is connected to 3 other nodes (randomly)
         % Here we have 16 genes (in case of a 4x4 matrix), so 16 positions. 
         % Q: can they be connected to itself ? For now, we assume yes because it's
@@ -75,7 +75,7 @@ function main()
 end
 
 % Reads user input
-function [matrix_size, no_of_connections] = read_input()
+function [matrix_size, no_of_connections, no_of_iterations] = read_input()
     prompt = "Please give a matrix size between 2 and 200 (e.g. 4-> 4x4): ";
     matrix_size = input(prompt);
     
@@ -94,7 +94,16 @@ function [matrix_size, no_of_connections] = read_input()
         msgbox("Invalid number of connections. Please choose a number between 2 and 3. ");
         no_of_connections = input(prompt);
     end    
+
+    prompt = "Please give the number of iterations (between 1 and 100): ";
+    no_of_iterations = input(prompt);
     
+    % Ensuring correct input
+    while no_of_iterations < 1 || no_of_iterations > 100
+        msgbox("Invalid number of iterations. Please choose a number between 1 and 100. ");
+        no_of_connections = input(prompt);
+    end    
+
 end
 
 % It should be possible to do this more efficiently, will have a look at it
