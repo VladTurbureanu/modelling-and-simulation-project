@@ -4,7 +4,9 @@ function main()
     % Each node in the network has a boolean variable attached to it (0 or 1)
     % Increase the number after '>' for less ones, decrease it for more.
     A = rand(matrix_size,matrix_size) > 0.7;
+
     neighbouring_nodes = {};
+    all_matrices = {};
     no_of_genes = matrix_size * matrix_size;
 
     % Specific rules for transitioning
@@ -19,6 +21,7 @@ function main()
     % network
     % state_matrix = zeros(matrix_size,matrix_size,20);
     for iteration = 1:no_of_iterations
+        all_matrices{iteration} = A;
         % Each node in the network is connected to 3 other nodes (randomly)
         % Here we have 16 genes (in case of a 4x4 matrix), so 16 positions. 
         % Q: can they be connected to itself ? For now, we assume yes because it's
@@ -58,12 +61,21 @@ function main()
         A = new_matrix;
         display_grid(A, iteration)
         pause(0.3)
-        % state_matrix(:,:,iteration) = A;
+        
+        [found_cycle, last_value] = find_cycle(A, all_matrices);
+        if found_cycle == 1
+            disp('Found a cycle! In iteration and with the last value of finding this pattern:')
+            iteration
+            last_value
+            cycle_length = iteration - last_value
+        end
+    
     end
     % display the network as a directed graph by using the adjacency matrix
     figure;
     G = digraph(adjacency_matrix);
     plot(G);
+    
     
 end
 
@@ -156,4 +168,20 @@ function display_grid(A, iteration)
     title(['Iteration ', num2str(iteration)])
 end
 
+function [found_cycle, last_value] = find_cycle(A, all_matrices)
+    flag = 0;
+    last_value = 0;
+    % Identifying cycles
+    for j = 1:length(all_matrices)-1
+        if(all_matrices{j} == A)
+            flag = 1;
+            last_value = j;
+        end
+    end
+    if flag == 0
+        found_cycle = 0;
+    else
+        found_cycle = 1;
+    end
+end
 
