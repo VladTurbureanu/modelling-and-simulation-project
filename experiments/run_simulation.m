@@ -1,10 +1,10 @@
 function run_simulation()
-    [matrix_size, no_of_connections, no_of_iterations, visualization, run_to_end] = read_input();
+    [matrix_size, no_of_connections, no_of_iterations, visualization, run_to_end, tautology_and_contradiction, runs] = read_input();
     
     cycle_lengths = [];
-    for i = 1:50
-        disp("Found " + i + " / 200 cycles so far...")
-        cycle_lengths(i) = boolean_network_matrix(matrix_size, no_of_connections, no_of_iterations, visualization, run_to_end);
+    for i = 1:runs
+        disp("Run " + i + " out of " + runs)
+        cycle_lengths(i) = boolean_network_matrix(matrix_size, no_of_connections, no_of_iterations, visualization, run_to_end, tautology_and_contradiction);
     end
     
     cycle_lengths
@@ -29,7 +29,7 @@ function run_simulation()
 end
 
 % Reads user input
-function [matrix_size, no_of_connections, no_of_iterations, visualization, run_to_end] = read_input()
+function [matrix_size, no_of_connections, no_of_iterations, visualization, run_to_end, tautology_and_contradiction, runs] = read_input()
     prompt = "Please give a matrix size between 2 and 200 (e.g. 4-> 4x4): ";
     matrix_size = input(prompt);
     
@@ -63,5 +63,16 @@ function [matrix_size, no_of_connections, no_of_iterations, visualization, run_t
     
     prompt = "Run to end (1) or Find cycles (0): ";
     run_to_end = input(prompt);
+    
+    prompt = "Tautology and Contradiction enabled (1) or disabled (0): ";
+    tautology_and_contradiction = input(prompt);
 
+    prompt = "Please give the number of runs (between 1 and 1000): ";
+    runs = input(prompt);
+    
+    % Ensuring correct input
+    while no_of_iterations < 1 || no_of_iterations > 1000
+        msgbox("Invalid number of runs. Please choose a number between 1 and 1000. ");
+        no_of_connections = input(prompt);
+    end  
 end

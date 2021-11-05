@@ -1,4 +1,4 @@
-function cycle_length = boolean_network_matrix(matrix_size, no_of_connections, no_of_iterations, visualization, run_to_end)
+function cycle_length = boolean_network_matrix(matrix_size, no_of_connections, no_of_iterations, visualization, run_to_end, tautology_and_contradiction)
     %[matrix_size, no_of_connections, no_of_iterations] = read_input();
     
     % Each node in the network has a boolean variable attached to it (0 or 1)
@@ -49,11 +49,14 @@ function cycle_length = boolean_network_matrix(matrix_size, no_of_connections, n
                 % e.g. random values with 3 input (-> 8 permutations)
                 truth_table_values{gene} = randi([0 1],1, 2^no_of_connections);
                 
+
                 % Remove tautology and contradiction
-                contradiction = zeros(size(truth_table_values{gene}));
-                tautology = ones(size(truth_table_values{gene}));
-                while (isequal(truth_table_values{gene},contradiction) || isequal(truth_table_values{gene},tautology))
-                    truth_table_values{gene} = randi([0 1],1, 2^no_of_connections);
+                if (tautology_and_contradiction == 0)
+                    contradiction = zeros(size(truth_table_values{gene}));
+                    tautology = ones(size(truth_table_values{gene}));
+                    while (isequal(truth_table_values{gene},contradiction) || isequal(truth_table_values{gene},tautology))
+                        truth_table_values{gene} = randi([0 1],1, 2^no_of_connections);
+                    end
                 end
             
             end
