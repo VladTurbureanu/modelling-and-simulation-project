@@ -52,7 +52,7 @@ function cycle_length = boolean_network_matrix(matrix_size, no_of_connections, n
                 % Remove tautology and contradiction
                 contradiction = zeros(size(truth_table_values{gene}));
                 tautology = ones(size(truth_table_values{gene}));
-                while (truth_table_values{gene} == contradiction || truth_table_values{gene} == tautology)
+                while (isequal(truth_table_values{gene},contradiction) || isequal(truth_table_values{gene},tautology))
                     truth_table_values{gene} = randi([0 1],1, 2^no_of_connections);
                 end
             

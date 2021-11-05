@@ -2,7 +2,7 @@ function run_simulation()
     [matrix_size, no_of_connections, no_of_iterations, visualization, run_to_end] = read_input();
     
     cycle_lengths = [];
-    for i = 1:200
+    for i = 1:50
         disp("Found " + i + " / 200 cycles so far...")
         cycle_lengths(i) = boolean_network_matrix(matrix_size, no_of_connections, no_of_iterations, visualization, run_to_end);
     end
