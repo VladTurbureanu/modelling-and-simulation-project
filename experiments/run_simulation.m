@@ -40,12 +40,12 @@ function [matrix_size, no_of_connections, no_of_iterations, visualization, run_t
     end
     
     % Choose 2 or 3 as the other ones have not yet been properly implemented
-    prompt = "Please give the number of connections per gene (between 2 and 3) (for now, still need to implement more): ";
+    prompt = "Please give the number of connections per gene (between 1 and 4): ";
     no_of_connections = input(prompt);
     
     % Ensuring correct input
     while no_of_connections < 1 || no_of_connections > 4
-        msgbox("Invalid number of connections. Please choose a number between 2 and 3. ");
+        msgbox("Invalid number of connections. Please choose a number between 1 and 4. ");
         no_of_connections = input(prompt);
     end    
 
