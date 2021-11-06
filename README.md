@@ -21,3 +21,5 @@ Run: run_simulation.m
 - _no_of_iterations_: Number of updates in the network
 - _visualization_: Visualization for the matrix and network structure (on or off)
 - _run_to_end_: Run all iterations or break when a cycle is found
+- _tautology_and_contradiction_: Whether tautology and contradiction are used 
+- _runs_: Number of runs to be performed
