@@ -4,11 +4,6 @@ Modelling and Simulation Course Project
 
 ## Running the code
 
-For one experiment:
-```shell
-Run: boolean_network_matrix.m
-```
-
 For bulk experiments + histogram output:
 ```shell
 cd experiments
