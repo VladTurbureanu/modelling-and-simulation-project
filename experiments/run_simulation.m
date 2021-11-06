@@ -49,12 +49,12 @@ function [matrix_size, no_of_connections, no_of_iterations, visualization, run_t
         no_of_connections = input(prompt);
     end    
 
-    prompt = "Please give the number of iterations (between 1 and 1000): ";
+    prompt = "Please give the number of iterations (between 1 and 5000): ";
     no_of_iterations = input(prompt);
     
     % Ensuring correct input
-    while no_of_iterations < 1 || no_of_iterations > 1000
-        msgbox("Invalid number of iterations. Please choose a number between 1 and 1000. ");
+    while no_of_iterations < 1 || no_of_iterations > 5000
+        msgbox("Invalid number of iterations. Please choose a number between 1 and 5000. ");
         no_of_connections = input(prompt);
     end    
     
@@ -71,8 +71,8 @@ function [matrix_size, no_of_connections, no_of_iterations, visualization, run_t
     runs = input(prompt);
     
     % Ensuring correct input
-    while no_of_iterations < 1 || no_of_iterations > 1000
+    while runs < 1 || runs > 1000
         msgbox("Invalid number of runs. Please choose a number between 1 and 1000. ");
-        no_of_connections = input(prompt);
+        runs = input(prompt);
     end  
 end

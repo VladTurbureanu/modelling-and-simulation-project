@@ -49,7 +49,6 @@ function cycle_length = boolean_network_matrix(matrix_size, no_of_connections, n
                 % e.g. random values with 3 input (-> 8 permutations)
                 truth_table_values{gene} = randi([0 1],1, 2^no_of_connections);
                 
-
                 % Remove tautology and contradiction
                 if (tautology_and_contradiction == 0)
                     contradiction = zeros(size(truth_table_values{gene}));
